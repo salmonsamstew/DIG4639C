@@ -13,22 +13,17 @@ import { WebBrowser } from 'expo';
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-  _gotoScreen = (key) => {
-    console.log("Going to " + key);
-  }
-  render() {
+export default class Detail extends React.Component {
+  render ()
+  {
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>Cats are amazing</Text>
+            <Text style={styles.getStartedText}>These are a few photos I have taken</Text>
             <FlatList
-             data={[{key: 'cat1',image: require('../assets/images/cat1.png')}, {key: 'cat2',image: require('../assets/images/cat2.png')}]}
+             data={[{key: 'Sax 1',image: require('../assets/images/Sax 1.jpg')}, {key: 'Sax 2',image: require('../assets/images/Sax 2.jpg')}, {key: 'Sexy Sax man',image: require('../assets/images/Sexy Sax man.jpg')}]}
              keyExtractor={this._keyExtractor}
               renderItem={({item}) => <TouchableOpacity onPress={(event) => { this.props.navigation.navigate('Detail')}}>
                 <Image source={item.image} style={{width:200,height:200}} />
@@ -39,8 +34,8 @@ export default class HomeScreen extends React.Component {
       </View>
     );
   }
-
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -85,10 +80,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    fontSize: 20,
+    color: '#7C0A02',
     lineHeight: 24,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   tabBarInfoContainer: {
     position: 'absolute',
