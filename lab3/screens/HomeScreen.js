@@ -20,19 +20,74 @@ export default class HomeScreen extends React.Component {
   _gotoScreen = (key) => {
     console.log("Going to " + key);
   }
+
+  class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      pictures: [],
+    };
+  }
+
+  componentDidMount(){
+    alert(process.env.157100dbd7d36a11097e7a3ba7dab5ff);
+    fetch('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='+process.env.157100dbd7d36a11097e7a3ba7dab5ff+'&tags=nyc&per_page=10&page=1&format=json&nojsoncallback=1')
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(j){
+      alert(JSON.stringify(j));
+      let picArray = j.photos.photo.map((pic) => {
+
+        var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
+        return(
+          <img alt="dogs" src={srcPath}></img>
+        )
+      })
+      this.setState({pictures: picArray});
+    }.bind(this))
+  }
+
+
+
   render() {
     const {navigate} = this.props.navigation;
     return (
+
+        <div id=appbody>
+        <p className="App-intro">
+          {this.state.pictures}
+        </p>
+        </div>
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.getStartedContainer}>
-            <Text style={styles.getStartedText}>Cats are amazing</Text>
+
+            <Text style={styles.getStartedText}>Check out these pictures!</Text>
             <FlatList
-             data={[{key: 'cat1',image: require('../assets/images/cat1.png')}, {key: 'cat2',image: require('../assets/images/cat2.png')}]}
+             data={[
+               {key: 'Black cat crouching',image: require('../assets/images/cat1.png')}, 
+               {key: 'Striped kitten',image: require('../assets/images/cat2.png')}]}
              keyExtractor={this._keyExtractor}
-              renderItem={({item}) => <TouchableOpacity onPress={(event) => { this.props.navigation.navigate('Detail')}}>
+              renderItem={({item}) => <TouchableOpacity
+<<<<<<< HEAD
+              onPress={(event) => { this.props.navigation.navigate('Detail')}}>
                 <Image source={item.image} style={{width:200,height:200}} />
               </TouchableOpacity>}
+=======
+                  onPress={(event) => 
+                  { 
+                    navigate("Detail",{
+                      title:item.key,
+                      image:item.image})
+                  }
+                  }>
+                  <Text>{item.key}</Text>
+                  <Image source={item.image} style={{
+                  width:300,height:250,
+                  resizeMode:"contain"}} />
+                </TouchableOpacity>}
+>>>>>>> cca949b5ff178a251102000ab56290d09980f824
             />
           </View>
         </ScrollView>

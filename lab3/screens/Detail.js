@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import {
   Image,
   Platform,
@@ -31,11 +32,28 @@ export default class Detail extends React.Component {
             />
           </View>
         </ScrollView>
+=======
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+
+export default class DetailScreen extends React.Component {
+  static navigationOptions = {
+    title: "Detail",
+  };
+  
+  render() {
+    const title = this.props.navigation.getParam("title","");
+    const image = this.props.navigation.getParam("image",null);
+    return (
+      <View style={styles.container}>
+        <Text style={{fontSize:40,justifyContent:"center",alignContent:"center"}}>{title}</Text>
+        <Image style={{flex:1,width:"100%",height:undefined,resizeMode:"contain"}} source={image}></Image>
+>>>>>>> cca949b5ff178a251102000ab56290d09980f824
       </View>
     );
   }
 }
 
+<<<<<<< HEAD
 
 const styles = StyleSheet.create({
   container: {
@@ -125,4 +143,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#2e78b7',
   },
+=======
+const styles = StyleSheet.create({
+  container: {
+    flex:1,
+    alignItems:"center",
+    paddingTop: 15,
+    backgroundColor: '#fff',
+  },
+>>>>>>> cca949b5ff178a251102000ab56290d09980f824
 });
