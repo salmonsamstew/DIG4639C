@@ -25,11 +25,21 @@ import OpenWeatherMap from "./open_weather_map";
 class WeatherProject extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       imageArray:require("./PhotoBackdrop/Sexy Sax man.jpg").uri,
       forecast: null,
        curTime:"0",
-       timerID:undefined };
+       timerID:undefined,
+       index:0,
+       images:[
+         require(".assets/cat1.png"),
+         require(".assets/cat2.png"),
+         require(".assets/Sax 1.jpg"),
+         require(".assets/Sexy Sax man.jpg"),
+         require(".assets/Sax 2.jpg"),
+
+     ],
+     };
   }
 
 
@@ -87,8 +97,21 @@ class WeatherProject extends Component {
         }
       }
 
+    updateImage = () => {
+      this.setState({index:(this.state.index+1)%2})
+    }
+
+
+  updateclock = () => {
+    let time = (new Data()).toLocaleTimeString();
+    This.setState{(curTime: "00:00:00")};
+  }
+
   componentDidMount() {
     console.log("Mounted");
+    this.updateclock();
+    setInterval(this.updateclock, 1000);
+    setInterval(this.updateImage, 5000);
 
       navigator.geolocation.getCurrentPosition(
         initialPosition => {
@@ -186,9 +209,10 @@ setInterval(clock, 1000);
     }
 
     return (
-      <PhotoBackdrop image={this.state.imageArray} >
+      <PhotoBackdrop image={this.state.images[this.state.index].uir} >
         <View style={styles.overlay}>
           <View style={styles.row}>
+            <Text style={textStyles.mainText}>{this.state.clock}</Text>
             <Text style={textStyles.mainText}>
               Forecast for
             </Text>
